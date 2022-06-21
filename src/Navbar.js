@@ -26,6 +26,7 @@ export default function Navbar() {
     return (
         <div>
         <NavLink exact to="/Home">Home</NavLink>
+        <NavLink exact to="/cart">cart</NavLink>
         {/* {data.map((catagory, index) => (
             <NavLink key={index} exact to={`/Home/${catagory}`}>{catagory}</NavLink>
         ))} */}

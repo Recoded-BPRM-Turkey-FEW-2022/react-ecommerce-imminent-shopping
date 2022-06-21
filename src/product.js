@@ -4,9 +4,10 @@ import { useQuery } from "react-query";
 import { useParams, Link } from "react-router-dom";
 
 
-export default function product() {
+export default function product({cart, setCart }) {
+    // const [cart , setCart] = useState([]);
     const {Id} = useParams();
-    console.log(Id);
+    // console.log(Id);
     const [data, setData] = useState([]);
     // const { data, isLoading, error } = useQuery("product", () =>
     //     fetch(`https://fakestoreapi.com/products/${Id}`).then((res) => res.json())
@@ -28,10 +29,30 @@ export default function product() {
         }
             )
         }, [Id])
+
+        // useEffect(() => {
+        //     setCart(JSON.parse(localStorage.getItem("cart")));
+        // }, [cart]);
+
+        function addToCart(product) {
+            // console.log(product);
+            const cartAdded = [...cart, product];
+            setCart(cartAdded);
+            // setIsInCart(true);
+            // localStorage
+            //     .setItem("cart", JSON.stringify(cart));
+        }
+
     return (
         <div>
             <p>earyer</p>
+            
             <div key={data.id}>
+            <button onClick={
+                () => {
+                    addToCart(data);
+                }
+            } >Add to cart</button>
             <h2>{data.title}</h2>
             <p>{data.price}</p>
             <img src={data.image} alt="" />
