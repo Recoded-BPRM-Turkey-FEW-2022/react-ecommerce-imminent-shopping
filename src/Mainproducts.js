@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./style.css";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -13,6 +13,35 @@ import Typography from '@mui/material/Typography';
 
 
 export default function Main({ data, cart, setCart }) {
+
+  const[products, setProducts] = useState(data)
+
+
+
+    function byPrice() {
+      const Filter = [...data].sort((a, b) => {
+          return a.price - b.price;
+      });
+      console.log(Filter);
+      setProducts(Filter);
+  }
+
+  function byName() {
+    const filter = [...data].sort(
+        (a, b) => a.title.localeCompare(b.title)
+    );
+    setProducts(filter);
+}
+
+function byRating() {
+  const filter = [...products].sort((a, b) => {
+      return a.rating.rate - b.rating.rate;
+  });
+  setProducts(filter);
+}
+
+
+console.log(products);
 
 //   const { data, isLoading, error } = useQuery("products", () =>
 //     fetch("https://fakestoreapi.com/products").then((res) => res.json())
@@ -35,14 +64,23 @@ export default function Main({ data, cart, setCart }) {
 
     
     <div>
-       {data.map((product) => (
+
+      <div>
+      <Button variant="contained" onClick={()=> byPrice()}>By Price</Button>
+      <Button variant="contained" onClick={()=> byName()}>By Name</Button>
+      <Button variant="contained" onClick={()=> byRating()}>By Rating</Button>
+      {/* <Button variant="contained">Contained</Button>
+      <Button variant="contained">Contained</Button> */}
+      </div>
+
+       {products.map((product) => (
 
 
 <Card  key={product.id} sx={{ maxWidth: 345 }}>
 <CardMedia
   component="img"
   height="140"
-  image={product.image}
+  image={product.images[0]}
   alt="green iguana"
 />
 <CardContent>
