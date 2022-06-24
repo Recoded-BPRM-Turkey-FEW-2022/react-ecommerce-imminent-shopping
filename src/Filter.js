@@ -23,13 +23,19 @@ export default function Filter() {
         return <div>Error...</div>;
     }
 
-    // console.log(data);
-    // const match = useRouteMatch();
+    function handleChange(){
+        
+    }
+
     return (
         <div>
-        {data.map((catagory, index) => (
-            <Link key={index} to={`/Home/${catagory}`}>{catagory}</Link>
+       {data.map((catagory, index) => (
+<Link key={index} to={`/Home/${catagory}`}>{catagory}</Link>
         ))}
+        <Link to={`/Home/name`}>by name</Link>
+        {/* <select >
+            <option value={0}><Link to={`/Home/name`} >name</Link></option>
+        </select> */}
         </div>
     );
     }

@@ -6,23 +6,24 @@ import { Route, Router, BrowserRouter, Switch, Link, useRouteMatch } from "react
 import Catagory from "./Catagory";
 import Filter from "./Filter";
 import Product from "./product";
+import Name from "./Name"
 
 
 
 
-export default function Allproduct({cart, setCart}) {
+export default function Allproduct({cart, setCart, addItem}) {
     
     console.log(cart);
     
     const match = useRouteMatch();
-    // console.log(match);
+    console.log(match);
 
     
    
     const { data, isLoading, error } = useQuery("products", () =>
-    fetch("https://fakestoreapi.com/products").then((res) => res.json())
+    fetch("https://api.escuelajs.co/api/v1/products").then((res) => res.json())
   );
-//   console.log(data);
+  console.log(data);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -36,6 +37,7 @@ if (error) {
     return (
         <div> 
             <Filter />
+
             <Switch>
             <Route exact path={`${match.url}`}>
             <Mainproducts cart={cart} setCart={setCart} data={data} />
@@ -46,7 +48,11 @@ if (error) {
             </Route >
 
             <Route exact path={`${match.url}/products/:Id`}>
-            <Product cart={cart} setCart={setCart} />
+            <Product addItem={addItem} cart={cart} setCart={setCart} />
+            </Route>
+
+            <Route exact path={`${match.url}/name`}>
+            <Name />
             </Route>
 
             

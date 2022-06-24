@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useParams, Link } from "react-router-dom";
 
 
-export default function product({cart, setCart }) {
+export default function product({cart, setCart, addItem }) {
     // const [cart , setCart] = useState([]);
     const {Id} = useParams();
     // console.log(Id);
@@ -22,7 +22,7 @@ export default function product({cart, setCart }) {
     // console.log(data);
     
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${Id}`)
+        fetch(`https://api.escuelajs.co/api/v1/products/${Id}`)
         .then((res) => res.json())
         .then((data) => {
             setData(data);
@@ -34,25 +34,27 @@ export default function product({cart, setCart }) {
         //     setCart(JSON.parse(localStorage.getItem("cart")));
         // }, [cart]);
 
-        function addToCart(product) {
+        // function addToCart(product) {
             // console.log(product);
-            const cartAdded = [...cart, product];
-            setCart(cartAdded);
+            // if(cart.includes(product)){
+            //     product.quantity =+ 1
+            // } 
+            // else {
+                // const cartAdded = [...cart, product];
+                // setCart(cartAdded);
+            // }
+            
             // setIsInCart(true);
             // localStorage
-            //     .setItem("cart", JSON.stringify(cart));
-        }
+            //     .setItem("cart", JSON.stringify(cartAdded));
+        // }
 
     return (
         <div>
             <p>earyer</p>
             
             <div key={data.id}>
-            <button onClick={
-                () => {
-                    addToCart(data);
-                }
-            } >Add to cart</button>
+            <button onClick={()=> addItem(data)} >Add to cart</button>
             <h2>{data.title}</h2>
             <p>{data.price}</p>
             <img src={data.image} alt="" />
