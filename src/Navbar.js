@@ -1,48 +1,39 @@
 import React from "react";
 import "./style.css";
 import { useQuery } from "react-query";
-import {NavLink, useRouteMatch} from "react-router-dom";
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { useState } from "react";
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon, Tabs, Tab, Box } from "@mui/material";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { Link, useRouteMatch } from "react-router-dom";
+import Filter from "./Filter";
+
+
 
 
 export default function Navbar() {
-    // const fetchCatagory =  () => {
-    //     return fetch(`https://fakestoreapi.com/products/categories`)
-    //      .then((res) => {
-    //             return res.json();
-    //      })
-    //         }
-    
-    // const { data, isLoading, error } = useQuery("catagory", fetchCatagory);
-
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
-    // if (error) {
-    //     return <div>Error...</div>;
-    // }
-
-    // console.log(data);
-    // const match = useRouteMatch();
-    return (
-
-        <Box sx={{ width: '100%' }}>
-        <Tabs  >
-          <Tab label="Page One" href="/Home" />
-          <Tab label="Page Two" href="/cart" />
-          
-        </Tabs>
-      </Box>
 
 
-        // <div id="Nav">
-        // <NavLink exact to="/Home">Home</NavLink>
-        // <NavLink exact to="/cart">cart</NavLink>
-        // {/* {data.map((catagory, index) => (
-        //     <NavLink key={index} exact to={`/Home/${catagory}`}>{catagory}</NavLink>
-        // ))} */}
-        // </div>
-    );
-    }
+
+  // const [val, setValue] = useState();
+  return (
+
+    <div>
+      <AppBar position="static" sx={{ background: "#063970" }}>
+        <Toolbar sx={{}}>
+          <Tabs sx={{ marginRight: "auto" }} textColor="white" indicatorColor="secondary">
+
+            <Tab label="Home" href="/Home" sx={{ marginRight: "Autopx" }} ></Tab>
+            <Tab label="Cart" href="/cart" sx={{ marginRight: "10px" }}>
+            </Tab>
+            <Filter></Filter>
+          </Tabs>
+
+          <Button Variant="contained" sx={{ marginLeft: "auto" }}> Login</Button>
+          <Button Variant="contained" sx={{ marginLeft: "10px" }}> Sign Up</Button>
+        </Toolbar>
+      </AppBar>
+
+    </div>
+
+  );
+}
